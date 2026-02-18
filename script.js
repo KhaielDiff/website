@@ -8,6 +8,9 @@ const homeBtn=document.getElementById("homeBtn");
 const commentBtn=document.getElementById("commentBtn");
 const commentBar=document.getElementById("commentBar");
 const menuBtn=document.getElementById("menuBtn");
+const aboutBtn=document.getElementById("aboutBtn");
+const aboutPage=document.getElementById("aboutPage");
+
 
 const data=[
 {title:"Genshin Impact",description:"Open-World RPG"},
@@ -18,9 +21,9 @@ const data=[
 {title:"League Of Legends",description:"MOBA game"},
 {title:"Call Of Duty Mobile",description:"Fps/Battle Royale Game"},
 {title:"Pubg Mobile",description:"Fps/Battle Royale Game"},{title:"Honkai Star Rail",description:"Turn-Based RPG Game"}
-];
+];      
 
-function renderResults(items){
+function renderResults(items){  
 resultsContainer.innerHTML="";
 if(items.length===0){
 resultsContainer.innerHTML="<p style='padding:10px'>No results found</p>";
@@ -59,12 +62,15 @@ circle.classList.add("large","active-circle");
 mainCircle.addEventListener("click",()=>{
 commentBar.classList.remove("active");
 searchContainer.style.display="flex";
+
 searchContainer.classList.add("active");
 searchInput.focus();
 performSearch();
 });
 
 homeBtn.addEventListener("click",()=>{
+bottomBar.style.top = "";       
+bottomBar.style.bottom = "0px";  
 commentBar.classList.remove("active");
 searchContainer.style.display="flex";
 searchContainer.classList.remove("active");
@@ -72,7 +78,31 @@ searchContainer.classList.remove("active");
 
 commentBtn.addEventListener("click",()=>{
 searchContainer.style.display="none";
+bottomBar.style.top="0";
 commentBar.classList.add("active");
+});
+
+aboutBtn.addEventListener("click",()=>{
+if(aboutPage.classList.contains("active")){
+aboutPage.classList.remove("active");
+
+resetActive();
+mainCircle.classList.remove("small");
+mainCircle.classList.add("large","active-circle");
+searchContainer.style.display="flex";
+
+}else{ 
+
+resetActive();
+aboutBtn.classList.remove("small");
+aboutBtn.classList.add("large","active-circle");
+
+searchContainer.style.display="none";
+commentBar.classList.remove("active");
+
+aboutPage.classList.add("active");
+}
+
 });
 
 menuBtn.addEventListener("click",()=>{
@@ -83,5 +113,8 @@ searchContainer.classList.remove("active");
 });
 
 searchInput.addEventListener("input",performSearch);
+
+
+
 
 renderResults(data);

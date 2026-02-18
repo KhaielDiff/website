@@ -87,9 +87,13 @@ if(aboutPage.classList.contains("active")){
 aboutPage.classList.remove("active");
 
 resetActive();
-mainCircle.classList.remove("small");
-mainCircle.classList.add("large","active-circle");
+homeBtn.classList.remove("small");
+homeBtn.classList.add("large","active-circle");
 searchContainer.style.display="flex";
+searchContainer.classList.remove("active");
+commentBar.classList.remove("active");
+bottomBar.style.top = "";
+bottomBar.style.bottom = "0px";
 
 }else{ 
 

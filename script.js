@@ -11,6 +11,7 @@ const commentBar=document.getElementById("commentBar");
 const menuBtn=document.getElementById("menuBtn");
 const aboutBtn=document.getElementById("aboutBtn");
 const aboutPage=document.getElementById("aboutPage");
+const frontText=document.getElementById("frontText");
 
 
 const data=[
@@ -146,6 +147,7 @@ commentBar.classList.remove("active");
 searchContainer.style.display="flex";
 aboutPage.classList.remove("active")
 searchContainer.classList.add("active");
+frontText.style.display = "block";
 searchInput.focus();
 performSearch();
 });
@@ -157,6 +159,7 @@ searchContainer.style.display="flex";
 searchContainer.classList.remove("active");
 aboutPage.classList.remove("active")
 topBar.classList.remove("no-radius");
+frontText.style.display = "block";
 });
 
 commentBtn.addEventListener("click",()=>{
@@ -164,7 +167,7 @@ searchContainer.style.display="none";
 bottomBar.classList.add("move-top")
 commentBar.classList.add("active");
 aboutPage.classList.remove("active")
-
+frontText.style.display = "none";
 topBar.classList.add("no-radius");
 });
 
@@ -176,8 +179,7 @@ searchContainer.style.display="none";
 commentBar.classList.remove("active");
 aboutPage.classList.add("active");
 topBar.classList.remove("no-radius");
-
-
+frontText.style.display = "none";
 });
 
 menuBtn.addEventListener("click",()=>{
@@ -188,6 +190,7 @@ searchContainer.classList.remove("active");
 bottomBar.classList.remove("move-top");
 aboutPage.classList.remove("active")
 topBar.classList.remove("no-radius");
+frontText.style.display = "block";
 });
 
 searchInput.addEventListener("input",performSearch);

@@ -11,7 +11,7 @@ body {
 }
 
 .fronttext {
-  margin-top: calc(50px + -50vh);
+  margin-top: calc(50px + -70vh);
   display: flex;
   justify-content: center;
   width: 100%;
@@ -58,7 +58,7 @@ body {
   transition: 0.3s;
 }
 
-.container {
+.main-container {
   position: relative;
   overflow: hidden;
   width: 100%;
@@ -79,7 +79,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
+  margin-top: calc(50px + -37vh);
 }
 
 #searchBar {
@@ -92,11 +92,10 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-#results {
+#resultContainer {
   display: none;
   position: absolute;
-  top: 45px;
-  width: 300px;
+  margin-top: 1vh;
   background: white;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -202,10 +201,37 @@ body {
   background: #e6e6e6;
 }
 
+@font-face {
+  font-family: "Pixelmax";
+  src: url(pixel/alagard.ttf) format("opentype");
+}
+
 @media (max-width: 768px) {
   body {
     font-size: clamp(10px, 2vw, 13px);
   }
+}
+
+@keyframes slideFromLeft {
+  0% { opacity: 0; transform: translateX(-100%); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideFromRight {
+  0% { opacity: 0; transform: translateX(100%); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+.about-page .about-content p {
+  opacity: 0;
+}
+
+.slide-left {
+  animation: slideFromLeft 0.8s forwards ease-out;
+}
+
+.slide-right {
+  animation: slideFromRight 0.8s forwards ease-out;
 }
 
 .about-page {
@@ -223,6 +249,35 @@ body {
   transform: translateX(-100%);
   transition: transform 0.4s ease;
   z-index: 5;
+}
+
+
+.about-page .about-content {
+  text-align: justify;           
+  max-width: 990px;            
+
+  margin: 0 auto;               
+  font-family: 'Press Start 2P', monospace; 
+  line-height: 1.5;
+}
+
+.about-page .about-content h2 {
+  font-family: "Pixelmax";
+  font-size: 30px !important;
+  letter-spacing: 2px;
+  color: #fff;
+  text-shadow:
+     1px 1px #494848,
+     2px 2px #494848,
+     3px 3px #494848;
+  text-align: center;           
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+.about-page .about-content p {
+  text-align: justify;          
+  margin-bottom: 10px;
 }
 
 .about-page.active {

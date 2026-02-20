@@ -2,7 +2,7 @@ const topBar = document.querySelector(".top-bar");
 const bottomBar = document.getElementById("bottomBar");
 const circles = document.querySelectorAll(".bottom-bar .circle");
 const searchInput = document.getElementById("searchBar");
-const resultsContainer = document.getElementById("results");
+const resultsContainer = document.getElementById("resultContainer");
 const mainCircle = document.getElementById("mainCircle");
 const searchContainer = document.getElementById("searchContainer");
 const homeBtn = document.getElementById("homeBtn");
@@ -12,6 +12,8 @@ const menuBtn = document.getElementById("menuBtn");
 const aboutBtn = document.getElementById("aboutBtn");
 const aboutPage = document.getElementById("aboutPage");
 const frontText = document.getElementById("frontText");
+const paragraphs = aboutPage.querySelectorAll("p");
+const mainContainer = document.getElementById("mainContainer");
 
 const data = [
   { title: "Genshin Impact", description: "Open-World RPG" },
@@ -112,9 +114,18 @@ function renderResults(items) {
     const div = document.createElement("div");
     div.classList.add("result-item");
     div.innerHTML =
-      "<h3>" + item.title + "</h3><p>" + item.description + "</p>";
+      "<a href=''><h3>" + item.title + "</h3><p>" + item.description + "</p></a>";
+    div.addEventListener("click", () => {
+      openSecondPage(item);
+    });
     resultsContainer.appendChild(div);
   });
+  const rect = searchInput.getBoundingClientRect();
+  resultsContainer.style.top = `${rect.bottom + window.scrollY}px`;
+  resultsContainer.style.left = `${rect.left + window.scrollX}px`;
+  resultsContainer.style.width = `${rect.width}px`;
+
+  resultsContainer.style.display = "block";
 }
 
 function performSearch() {
@@ -123,6 +134,10 @@ function performSearch() {
     item.title.toLowerCase().includes(query),
   );
   renderResults(filtered);
+}
+
+function removeItemFromSearch(){
+  
 }
 
 function resetActive() {
@@ -151,6 +166,7 @@ mainCircle.addEventListener("click", () => {
   frontText.style.display = "block";
   searchInput.focus();
   performSearch();
+  renderResults(data);
 });
 
 homeBtn.addEventListener("click", () => {
@@ -160,6 +176,7 @@ homeBtn.addEventListener("click", () => {
   searchContainer.classList.remove("active");
   aboutPage.classList.remove("active");
   topBar.classList.remove("no-radius");
+  resultsContainer.style.display = "none";
   frontText.style.display = "block";
 });
 
@@ -168,32 +185,50 @@ commentBtn.addEventListener("click", () => {
   bottomBar.classList.add("move-top");
   commentBar.classList.add("active");
   aboutPage.classList.remove("active");
+  resultsContainer.style.display = "none";
   frontText.style.display = "none";
   topBar.classList.add("no-radius");
 });
 
 aboutBtn.addEventListener("click", () => {
   bottomBar.classList.remove("move-top");
-  aboutPage.classList.contains("active");
-  aboutPage.classList.remove("active");
   searchContainer.style.display = "none";
   commentBar.classList.remove("active");
   aboutPage.classList.add("active");
+  resultsContainer.style.display = "none";
   topBar.classList.remove("no-radius");
   frontText.style.display = "none";
+
+  const paragraphs = aboutPage.querySelectorAll("p");
+
+  paragraphs.forEach((p) => {
+    p.classList.remove("slide-left", "slide-right");
+  });
+
+  void paragraphs[0].offsetWidth;
+
+  if (paragraphs[0])
+    setTimeout(() => paragraphs[0].classList.add("slide-left"), 100);
+  if (paragraphs[1])
+    setTimeout(() => paragraphs[1].classList.add("slide-right"), 300);
+  if (paragraphs[2])
+    setTimeout(() => paragraphs[2].classList.add("slide-left"), 500);
 });
 
 menuBtn.addEventListener("click", () => {
   bottomBar.classList.toggle("hidden");
   resetActive();
+  homeBtn.classList.remove("small");
+  homeBtn.classList.add("large", "active-circle");
   commentBar.classList.remove("active");
   searchContainer.classList.remove("active");
   bottomBar.classList.remove("move-top");
   aboutPage.classList.remove("active");
+  resultsContainer.style.display = "none";
   topBar.classList.remove("no-radius");
   frontText.style.display = "block";
 });
 
 searchInput.addEventListener("input", performSearch);
 
-renderResults(data);
+
